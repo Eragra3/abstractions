@@ -64,6 +64,20 @@ namespace Unity.Injection
             return $"Invoke.Method('{Name}', {Data.Signature()})";
         }
 
+        public override int GetHashCode()
+        {
+            if (Selection == null)
+            {
+                return 0;
+            }
+
+            int hash = 17;
+            hash = hash * 31 + Selection.GetHashCode();
+            hash = hash * 31 + Data.GetHashCode();
+
+            return hash;
+        }
+
 #if NETSTANDARD1_0
 
         public override bool Equals(MethodInfo other)
